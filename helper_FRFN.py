@@ -4,6 +4,7 @@ from tqdm.auto import tqdm
 from torchmetrics import ConfusionMatrix
 from mlxtend.plotting import plot_confusion_matrix
 from typing import List
+from pathlib import Path
 
 def accuracy_fn(y_true, y_pred):
     """Returns the accuracy of the given y_true and y_pred values"""
@@ -32,7 +33,7 @@ def train_step(model: torch.nn.Module, dataloader: torch.utils.data.DataLoader, 
 
 def test_step(model: torch.nn.Module, test_dataloader: torch.utils.data.DataLoader, loss_fn: torch.nn.Module, device):
     """Tests how good the model is trained"""
-    test_loss, test_accuracy = 0, 0
+    test_loss, test_acc = 0, 0
     model.eval()
     with torch.inference_mode():
         for batch, (X, y) in enumerate(test_dataloader):
@@ -40,17 +41,17 @@ def test_step(model: torch.nn.Module, test_dataloader: torch.utils.data.DataLoad
             test_pred = model(X)
 
             test_loss += loss_fn(test_pred, y).item()
-            test_accuracy += accuracy_fn(y_true=y, y_pred=test_pred.argmax(dim=1))
+            test_acc += accuracy_fn(y_true=y, y_pred=test_pred.argmax(dim=1))
 
         test_loss /= len(test_dataloader)
-        test_accuracy /= len(test_dataloader)
-        return test_loss, test_accuracy
+        test_acc /= len(test_dataloader)
+        return test_loss, test_acc
 
 def train_model(model: torch.nn.Module, train_dataloader: torch.utils.data.DataLoader, test_dataloader: torch.utils.data.DataLoader, loss_fn: torch.nn.Module, optimizer: torch.optim.Optimizer, epochs: int, device):
     """Training and testing the model and returns the results of the training and testing loos and accuracy to plot loss and accuracy curves."""
     results = {"train_loss": [], "train_acc": [], "test_loss": [], "test_acc": []}
 
-    for epoch in tqdm(range(epochs), leave=False):
+    for epoch in tqdm(range(epochs)):
         train_loss, train_acc = train_step(model=model, dataloader=train_dataloader, loss_fn=loss_fn, optimizer=optimizer, device=device)
         test_loss, test_acc = test_step(model=model, test_dataloader=test_dataloader, loss_fn=loss_fn, device=device)
 
