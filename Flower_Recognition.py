@@ -14,19 +14,18 @@ data_dir = Path("Data")
 train_dir = data_dir / "Training_Data"
 test_dir = data_dir / "Testing_Data"
 
-data_transform_train = transforms.Compose([
-    transforms.Resize(size=(128, 128)),
-    transforms.TrivialAugmentWide(num_magnitude_bins=31),
-    transforms.ToTensor()
-])
+train_dataset = datasets.ImageFolder(root=train_dir, 
+                                     transform=transforms.Compose([
+                                        transforms.Resize(size=(128, 128)),
+                                        transforms.TrivialAugmentWide(num_magnitude_bins=31),
+                                        transforms.ToTensor()
+                                     ]))
 
-data_transform_test = transforms.Compose([
-    transforms.Resize(size=(128, 128)),
-    transforms.ToTensor()
-])
-
-train_dataset = datasets.ImageFolder(root=train_dir, transform=data_transform_train)
-test_dataset = datasets.ImageFolder(root=test_dir, transform=data_transform_test)
+test_dataset = datasets.ImageFolder(root=test_dir, 
+                                    transform=transforms.Compose([
+                                        transforms.Resize(size=(128, 128)),
+                                        transforms.ToTensor
+                                    ]))
 
 BATCH_SIZE = 64
 epochs = 4
@@ -68,7 +67,7 @@ model = Flowers_NN(input_shape=input_shape, hidden_units=hidden_units, output_sh
 loss_fn = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(params=model.parameters(), lr=0.001)
 
-train = True
+train = False
 show_model_quality = False
 if train:
     start_training_time = timer()
