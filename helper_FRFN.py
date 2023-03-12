@@ -4,7 +4,6 @@ from tqdm.auto import tqdm
 from torchmetrics import ConfusionMatrix
 from mlxtend.plotting import plot_confusion_matrix
 from typing import List
-from pathlib import Path
 
 def accuracy_fn(y_true, y_pred):
     """Returns the accuracy of the given y_true and y_pred values"""

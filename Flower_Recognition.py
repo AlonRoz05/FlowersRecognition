@@ -17,14 +17,16 @@ test_dir = data_dir / "Testing_Data"
 train_dataset = datasets.ImageFolder(root=train_dir, 
                                      transform=transforms.Compose([
                                         transforms.Resize(size=(128, 128)),
-                                        transforms.TrivialAugmentWide(num_magnitude_bins=31),
-                                        transforms.ToTensor()
+                                        transforms.ColorJitter(brightness=0.5),
+                                        transforms.RandomRotation(degrees=45),
+                                        transforms.RandomHorizontalFlip(p=0.5),
+                                        transforms.ToTensor(),
                                      ]))
 
 test_dataset = datasets.ImageFolder(root=test_dir, 
                                     transform=transforms.Compose([
                                         transforms.Resize(size=(128, 128)),
-                                        transforms.ToTensor
+                                        transforms.ToTensor()
                                     ]))
 
 BATCH_SIZE = 64
