@@ -14,7 +14,7 @@ data_dir = Path("Data")
 train_dir = data_dir / "Training_Data"
 test_dir = data_dir / "Testing_Data"
 
-train_dataset = datasets.ImageFolder(root=train_dir, 
+train_dataset = datasets.ImageFolder(root=train_dir,
                                      transform=transforms.Compose([
                                         transforms.Resize(size=(128, 128)),
                                         transforms.ColorJitter(brightness=0.5),
@@ -23,7 +23,7 @@ train_dataset = datasets.ImageFolder(root=train_dir,
                                         transforms.ToTensor(),
                                      ]))
 
-test_dataset = datasets.ImageFolder(root=test_dir, 
+test_dataset = datasets.ImageFolder(root=test_dir,
                                     transform=transforms.Compose([
                                         transforms.Resize(size=(128, 128)),
                                         transforms.ToTensor()
@@ -74,10 +74,10 @@ show_model_quality = False
 if train:
     start_training_time = timer()
 
-    model_results = helper.train_model(model=model, 
+    model_results = helper.train_model(model=model,
                                         train_dataloader=train_dataloader,
                                         test_dataloader=test_dataloader,
-                                        loss_fn=loss_fn, 
+                                        loss_fn=loss_fn,
                                         optimizer=optimizer,
                                         epochs=epochs,
                                         device=device)

@@ -19,7 +19,7 @@ def train_step(model: torch.nn.Module, dataloader: torch.utils.data.DataLoader, 
         X, y = X.to(device), y.to(device)
         y_pred = model(X)
         loss = loss_fn(y_pred, y)
-        train_loss += loss  
+        train_loss += loss
         train_acc += accuracy_fn(y_true=y, y_pred=y_pred.argmax(dim=1))
 
         optimizer.zero_grad()
