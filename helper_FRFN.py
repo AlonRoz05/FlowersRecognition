@@ -55,7 +55,7 @@ def train_model(model: torch.nn.Module, train_dataloader: torch.utils.data.DataL
         test_loss, test_acc = test_step(model=model, test_dataloader=test_dataloader, loss_fn=loss_fn, device=device)
 
         print(f"Epoch: {epoch}\n--------------------------------")
-        print(f"Train loss: {train_loss:.4f} | Train accuracy: {train_acc:.2f}\nTest loss: {test_loss:.4f} | Test accuracy: {test_acc:.2f}\n--------------------------------")
+        print(f"Train loss: {train_loss:.4f} | Train accuracy: {train_acc:.2f}%\nTest loss: {test_loss:.4f} | Test accuracy: {test_acc:.2f}%\n--------------------------------")
 
         results["train_loss"].append(train_loss.item())
         results["train_acc"].append(train_acc)

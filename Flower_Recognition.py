@@ -29,12 +29,13 @@ test_dataset = datasets.ImageFolder(root=test_dir,
                                         transforms.ToTensor()
                                     ]))
 
+class_names = train_dataset.classes
 BATCH_SIZE = 64
+#NUM_WORKERS = 1
 epochs = 4
 input_shape = 3
 hidden_units = 10
-class_names = train_dataset.classes
-num_classes = len(class_names)
+output_shape = len(class_names)
 
 train_dataloader = DataLoader(dataset=train_dataset, batch_size=BATCH_SIZE, shuffle=True)
 test_dataloader = DataLoader(dataset=test_dataset, batch_size=BATCH_SIZE, shuffle=True)
@@ -64,7 +65,8 @@ class Flowers_NN(nn.Module):
     def forward(self, x):
         return self.classifier(self.conv_block_2(self.conv_block_1(x)))
 
-model = Flowers_NN(input_shape=input_shape, hidden_units=hidden_units, output_shape=num_classes)
+model = Flowers_NN(input_shape=input_shape, hidden_units=hidden_units, output_shape=output_shape)
+model.to(device)
 
 loss_fn = nn.CrossEntropyLoss()
 optimizer = torch.optim.Adam(params=model.parameters(), lr=0.001)
@@ -93,7 +95,7 @@ if train:
     torch.save(model.state_dict(), MODEL_SAVE_PATH)
 
 else:
-    loaded_model = Flowers_NN(input_shape=input_shape, hidden_units=hidden_units, output_shape=num_classes)
+    loaded_model = Flowers_NN(input_shape=input_shape, hidden_units=hidden_units, output_shape=output_shape)
     loaded_model.load_state_dict(torch.load("./models/Flower_Detection_model.pth"))
     loaded_model.to(device)
 
