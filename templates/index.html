@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>FlowerAI</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+    </head>
+    <body>
+        <div>
+            <h1>FlowerAI</h1>
+        </div>
+        <div class="main-div">
+            <div class="cards">
+                <div class="image-card">
+                    <form method="POST" enctype="multipart/form-data">
+                        {{form.hidden_tag()}}
+                        {{form.file()}}
+                        {{form.submit()}}
+                    </form>
+                    <div class="uploaded-image-container">
+                        <img src="{{ url_for('serve_img')}}">
+                    </div>
+                    <form method="POST">
+                        <input type="submit" value="clear" name="clear-image"/>
+                    </form>
+                </div>
+                <div class="info-card">
+                    <div class="card-content">
+                        <h5>VALUABLE INFORMATION</h5>
+                        <h6>Confident: {{models_choice_probs}}</h6>
+                        <p>Name: {{flower_name}}</p>
+                        <p>Family: {{flower_family}}</p>
+                        <p>Information: {{flower_information}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="gallery">
+                <h5>Gallery</h5>
+                <div class="flowers-images-container">
+                    <div class="daisy-image-container">
+                        <img src="{{ url_for('static', filename='important_imgs/flowers/daisy_img.png')}}">
+                    </div>
+                    <div class="rose-image-container">
+                        <img src="{{ url_for('static', filename='important_imgs/flowers/rose_img.png')}}">
+                    </div>
+                    <div class="iris-image-container">
+                        <img src="{{ url_for('static', filename='important_imgs/flowers/iris_img.png')}}">
+                    </div>
+                    <div class="poppy-image-container">
+                        <img src="{{ url_for('static', filename='important_imgs/flowers/poppy_img.png')}}">
+                    </div>
+                    <div class="sunflower-image-container">
+                        <img src="{{ url_for('static', filename='important_imgs/flowers/sunflower_img.png')}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

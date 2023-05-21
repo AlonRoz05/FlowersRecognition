@@ -4,3 +4,5 @@ __pycache__
 Data
 .DS_Store
 test_files
+runs
+static/imgs
