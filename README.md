@@ -1,6 +1,5 @@
-### FlowerRecognition:
+### Overview of the project: 
 
-Overview of the project:
 Our web app allows you to either upload or select a photo of a flower.
 Our models are designed to accurately detect which flower it is and provide you with insightful information about it.
 You can trust us to deliver the best results and help you learn more about the beautiful world of flowers.
