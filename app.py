@@ -7,8 +7,11 @@ from werkzeug.utils import secure_filename
 from wtforms.validators import InputRequired
 from flask import Flask, render_template, send_from_directory, request
 
+with open("static/app_secret_key.txt", "r") as f:
+    secret_key = f.read()
+
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "}iAFozy.C81Rqa7jA]t,Bh+U6JHaq3mV5k=E1fTCt@Xy6]kMi~*71::MpEB>.#zwVv.RnuaW^,Td}n1Q*4X_n:]X-a>^NHbo?1Kx"
+app.config["SECRET_KEY"] = secret_key
 app.config["UPLOAD_FOLDER"] = "static/uploaded_imgs"
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
 app.config["ALLOWED_EXTENSIONS"] = ["png", "jpg", "jpeg", "PNG", "JPG", "JPEG"]
