@@ -8,4 +8,4 @@ runs
 static/imgs
 static/uploaded_imgs/image.png
 static/app_secret_key.txt
-models/Flower_Detection_Model.pth
+models
