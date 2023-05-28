@@ -1,0 +1,232 @@
+:root {
+    --main-bg-color: rgb(11, 14, 18);
+    --main-bg-input-color: rgb(22, 27, 37);
+    --main-hover-color: rgb(27, 32, 42);
+    --main-text-color: rgb(200, 200, 200);
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: rgb(11, 11, 17);
+    text-align: center;
+}
+
+h1 {
+    color: white;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+h5 {
+    color: rgb(100, 100, 190);
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+h6 {
+    color: rgb(75, 75, 75);
+    font-weight: 1000;
+    font-size: small;
+    margin-top: 0rem;
+    margin-bottom: 1.5rem;
+}
+
+p {
+    color: var(--main-text-color);
+    margin: 1rem;
+}
+
+img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+    border: 1px solid transparent;
+    border-radius: 0.4rem;
+    padding: 0.01rem;
+    margin: auto;
+}
+
+input {
+    color: var(--main-text-color);
+    background-color: var(--main-bg-input-color);
+    border: 1px solid transparent;
+    border-radius: 0.35rem;
+    padding: 1rem;
+    margin: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+input:hover {
+    background-color: var(--main-hover-color);
+}
+
+input[type="file"]::file-selector-button {
+    color: var(--main-text-color);
+    background-color: var(--main-bg-input-color);
+    border: 1px solid rgb(255 255 255 / 10%);
+    border-radius: 0.25rem;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.main-div {
+    display: flex;
+}
+
+.image-card {
+    width: 800px;
+    height: 450px;
+    position: relative;
+    background-color: var(--main-bg-color);
+    border: 1px solid rgb(255 255 255 / 5%);
+    text-align: center;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.image-card-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uploaded-image-container {
+    width: 750px;
+    height: 300px;
+    margin: auto;
+}
+
+.Language-selector {
+    min-width: 15px;
+    position: relative;
+    margin: 1rem;
+}
+
+.Language-selector * {
+    box-sizing: border-box;
+}
+
+.select {
+    color: var(--main-text-color);
+    background-color: var(--main-bg-input-color);
+    border: 1px transparent solid;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.select-clicked {
+    border: 1px rgb(143, 158, 193) solid;
+    box-shadow: 0 0 0 0.1em rgb(143, 158, 193);
+}
+
+.select:hover {
+    background-color: var(--main-hover-color);
+}
+
+.caret {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--main-text-color);
+    transition: 0.3s;
+    margin-left: 0.5rem;
+}
+
+.caret-rotate {
+    transform: rotate(180deg);
+}
+
+.menu {
+    list-style: none;
+    display: none;
+    color: var(--main-text-color);
+    background-color: var(--main-bg-input-color);
+    border: 1px rgb(54, 58, 67) solid;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 3em;
+    left: 50%;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: 0.2s;
+    padding: 0.2em 0.5em;
+    z-index: 1;
+}
+
+.menu li {
+    padding: 0.7em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background-color: rgb(65, 68, 87);
+}
+
+.active {
+    background-color: rgb(55, 58, 77);
+}
+
+.menu-open {
+    display: block;
+    opacity: 1;
+}
+
+.info-card {
+    width: 800px;
+    height: auto;
+    position: relative;
+    background-color: var(--main-bg-color);
+    border: 1px solid rgb(255 255 255 / 5%);
+    text-align: center;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.info-card-content {
+    opacity: 0.9;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.gallery {
+    width: 400px;
+    height: 670px;
+    position: relative;
+    background-color: var(--main-bg-color);
+    border: 1px solid rgb(255 255 255 / 5%);
+    text-align: center;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.flowers-images-container {
+    height: 645px;
+    width: 405px;
+    margin: auto;
+    overflow: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    border-radius: 0.9rem;
+    border-style: solid transparent;
+}
+
+.credits {
+    display: flex;
+    font-size: smaller;
+    margin: auto;
+}
