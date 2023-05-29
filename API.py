@@ -7,9 +7,9 @@ from base64 import b64decode
 app = FastAPI()
 
 def decode_imgs(cFile: str):
-    dFile = cFile.replace("_", "/").encode()
-    img = Image.open(BytesIO(b64decode(dFile + b"==")))
-    return img
+    dFile = (cFile.replace("_", "/") + "==").encode()
+    img = Image.open(BytesIO(b64decode(dFile)))
+    return img.convert("RGB")
 
 @app.get("/get_flower_info/{language}/{b64File}")
 async def return_flower_info(language: str, b64File: str):
