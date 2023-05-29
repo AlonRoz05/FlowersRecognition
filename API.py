@@ -8,7 +8,7 @@ app = FastAPI()
 
 def decode_imgs(cFile: str):
     dFile = cFile.replace("_", "/").encode()
-    img = Image.open(BytesIO(b64decode(dFile)))
+    img = Image.open(BytesIO(b64decode(dFile + b"==")))
     return img
 
 @app.get("/get_flower_info/{language}/{b64File}")

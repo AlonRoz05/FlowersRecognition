@@ -14,6 +14,7 @@ inpFile.addEventListener("change", e => {
 
     reader.addEventListener("load", () => {
         base64_image_url = reader.result;
+
         document.getElementById("uploaded_image").setAttribute('src', base64_image_url);
         base64_image_url = base64_image_url.slice(22);
 
