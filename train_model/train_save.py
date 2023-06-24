@@ -3,7 +3,7 @@ from pathlib import Path
 from tqdm.auto import tqdm
 from timeit import default_timer
 
-def train_save_model(model: torch.nn.Module, model_save_name: str, train_dataloader: torch.utils.data.DataLoader, test_dataloader: torch.utils.data.DataLoader, loss_fn: torch.nn.Module, optimizer:torch.optim.Optimizer, epochs: int, device, writer):
+def train_save_model(model: torch.nn.Module, model_save_name: str, train_dataloader: torch.utils.data.DataLoader, test_dataloader: torch.utils.data.DataLoader, loss_fn: torch.nn.Module, optimizer:torch.optim.Optimizer, epochs: int, device, writer=None):
     start_training_time = default_timer()
     results = {"train_loss": [], "train_acc": [], "test_loss": [], "test_acc": []}
 
@@ -49,21 +49,19 @@ def train_save_model(model: torch.nn.Module, model_save_name: str, train_dataloa
         results["train_acc"].append(train_acc)
         results["test_acc"].append(test_acc)
         
-        writer.add_scalars(main_tag="Loss", tag_scalar_dict={"train_loss": train_loss, "test_loss": test_loss}, global_step=epoch)
-        writer.add_scalars(main_tag="Accuracy", tag_scalar_dict={"train_accuracy": train_acc, "test_accuracy": test_acc}, global_step=epoch)
-        writer.add_graph(model=model, input_to_model=torch.randn(32, 3, 224, 224).to(device))
+        if writer != None:
+            writer.add_scalars(main_tag="Loss", tag_scalar_dict={"train_loss": train_loss, "test_loss": test_loss}, global_step=epoch)
+            writer.add_scalars(main_tag="Accuracy", tag_scalar_dict={"train_accuracy": train_acc, "test_accuracy": test_acc}, global_step=epoch)
+            writer.add_graph(model=model, input_to_model=torch.randn(32, 3, 224, 224).to(device))
 
-    writer.close()
+    if writer != None:
+        writer.close()
 
     end_training_time = default_timer()
     print(f"[INFO] Training took {end_training_time-start_training_time:.3f} on {device.upper()}.")
 
-    want_to_save = input("Do you want to save the model? (y/n): ")
-    if want_to_save.upper() == "Y":
-        print(f"[INFO] Saving model to ./models/{model_save_name}.pth")
-        MODEL_PATH = Path("./models")
-        MODEL_PATH.mkdir(parents=True, exist_ok=True)
-        torch.save(model.state_dict(), MODEL_PATH / f"{model_save_name}.pth")
-        print(f"[INFO] The model saved successfully.")
-    else:
-        print("[INFO] Quitting...")
+    print(f"[INFO] Saving model to ./models/{model_save_name}.pth")
+    MODEL_PATH = Path("./models")
+    MODEL_PATH.mkdir(parents=True, exist_ok=True)
+    torch.save(model.state_dict(), MODEL_PATH / f"{model_save_name}.pth")
+    print(f"[INFO] The model saved successfully.")
